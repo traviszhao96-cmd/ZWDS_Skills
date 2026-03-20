@@ -1,0 +1,4 @@
+interface:
+  display_name: "紫微工具箱"
+  short_description: "Charting, natal analysis, kinship, calibration"
+  default_prompt: "Use $ziwei-toolkit to chart this birth data, explain the natal structure step by step, and extend into kinship analysis or birth-time calibration if needed."

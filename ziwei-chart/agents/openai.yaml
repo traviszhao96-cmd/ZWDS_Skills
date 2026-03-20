@@ -1,0 +1,4 @@
+interface:
+  display_name: "紫微排盘"
+  short_description: "Generate Zi Wei Dou Shu charts and horoscope summaries"
+  default_prompt: "Use $ziwei-chart to generate a structured Zi Wei Dou Shu chart from this birth input."

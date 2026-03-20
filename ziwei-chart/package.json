@@ -1,0 +1,15 @@
+{
+  "name": "ziwei-chart-skill",
+  "private": true,
+  "type": "module",
+  "description": "Local tooling for the ziwei-chart Codex skill.",
+  "scripts": {
+    "chart": "node scripts/generate-chart.mjs"
+  },
+  "dependencies": {
+    "iztro": "2.5.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-iztro": "1.4.2"
+  }
+}

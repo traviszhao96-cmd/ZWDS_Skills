@@ -1,0 +1,6 @@
+.DS_Store
+.system/
+**/__pycache__/
+**/node_modules/
+**/outputs/
+**/records/people/

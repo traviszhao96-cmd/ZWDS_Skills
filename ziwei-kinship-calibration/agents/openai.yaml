@@ -1,0 +1,4 @@
+interface:
+  display_name: "六亲生肖校时"
+  short_description: "Validate Zi Wei birth time using relatives zodiac signs"
+  default_prompt: "Use $ziwei-kinship-calibration to validate a Zi Wei Dou Shu birth time from relatives zodiac signs and explain the relationship dynamics."
