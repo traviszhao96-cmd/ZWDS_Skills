@@ -1505,17 +1505,25 @@ function generateS4(
   }
   lines.push('');
 
-  lines.push('### S4-B2 大限飞忌对冲总表');
+  lines.push('### S4-B2 大限飞忌对冲摘要');
   lines.push('');
-  lines.push(`补充展开所有宫位的大限飞忌路径，只保留 ${TIMING_WINDOW.maxAge} 岁前的结构，不再限制当前时间窗口。`);
+  lines.push(`只保留“大限某宫 -> 冲原盘某宫 -> 触发流年”这条主线；保留 ${TIMING_WINDOW.maxAge} 岁前的结构，但不再展示调试用的中间路径列。`);
   lines.push('');
-  if (decadalGeneralClashFacts.length > 0) {
-    lines.push('| 大限宫职 | 大限范围 | 发射宫位 | 飞忌路径 | 飞忌落宫 | 忌冲宫 | 流年命宫触发 | 说明 |');
-    lines.push('|----------|----------|----------|----------|----------|--------|--------------|------|');
-    for (const fact of decadalGeneralClashFacts) {
-      lines.push(
-        `| ${fact.role} | ${fact.rangeInfo.startAge}-${fact.rangeInfo.endAge}岁（${fact.rangeInfo.startYear}-${fact.rangeInfo.endYear}） | ${fact.carrierPalace} | ${fact.tradeStar}忌→${fact.destPalace} | ${fact.destPalace} | ${fact.clashPalace} | ${fact.triggerYears.length > 0 ? fact.triggerYears.join('、') : '未命中'} | ${fact.issuePoint} |`,
-      );
+  const groupedGeneralFacts = new Map();
+  for (const fact of decadalGeneralClashFacts.filter((item) => item.triggerYears.length > 0)) {
+    const rangeLabel = `${fact.rangeInfo.startAge}-${fact.rangeInfo.endAge}岁（${fact.rangeInfo.startYear}-${fact.rangeInfo.endYear}）`;
+    if (!groupedGeneralFacts.has(rangeLabel)) {
+      groupedGeneralFacts.set(rangeLabel, []);
+    }
+    groupedGeneralFacts.get(rangeLabel).push(fact);
+  }
+
+  if (groupedGeneralFacts.size > 0) {
+    for (const [rangeLabel, facts] of groupedGeneralFacts.entries()) {
+      const summary = facts
+        .map((fact) => `大限${fact.role}冲原盘${fact.clashPalace}（${fact.triggerYears.join('、')}）`)
+        .join('；');
+      lines.push(`- ${rangeLabel}：${summary}`);
     }
   } else {
     lines.push('未检测到可收录的大限飞忌对冲结构。');
