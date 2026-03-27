@@ -410,6 +410,34 @@ function buildRepresentativeDate(rangeInfo) {
   return `${rangeInfo.startYear}-06-01`;
 }
 
+function buildYearlyReferenceDate(year) {
+  return `${year}-06-01`;
+}
+
+function collectSameRoleTriggerYears(chart, rangeInfo, role, carrierPalace) {
+  const years = [];
+  for (let year = rangeInfo.startYear; year <= rangeInfo.endYear; year += 1) {
+    let horoscope;
+    try {
+      horoscope = chart.horoscope(buildYearlyReferenceDate(year));
+    } catch {
+      continue;
+    }
+
+    let yearlyPalace;
+    try {
+      yearlyPalace = horoscope.palace(resolveRuntimePalaceName(role), 'yearly');
+    } catch {
+      continue;
+    }
+
+    if (normName(yearlyPalace?.name) === carrierPalace) {
+      years.push(year);
+    }
+  }
+  return years;
+}
+
 function collectDecadalStrikeFacts(input, palaces, starMap, birthYear) {
   if (!input || !birthYear) return [];
 
@@ -477,6 +505,7 @@ function collectDecadalStrikeFacts(input, palaces, starMap, birthYear) {
         tradeStar: dest.star,
         destPalace: dest.palace,
         clashPalace,
+        triggerYears: collectSameRoleTriggerYears(chart, rangeInfo, role, carrierPalace),
         issuePoint: `${PALACE_TOPICS[role] || role}在该大限承压，属于同类宫位的用忌冲体`,
       });
     }
@@ -1313,6 +1342,9 @@ function generateS4(
         problems.push(
           `- S4 大限用忌冲体：按宫位有效归大，以本命${fact.role}为体、大限${fact.role}为用。该大限落在本命${fact.carrierPalace}，${fact.carrierStem}干飞${fact.tradeStar}忌到${fact.destPalace}，冲回本命${fact.role}。触发问题点：${fact.issuePoint}。对应大限：${fact.rangeInfo.startAge}-${fact.rangeInfo.endAge}岁（${fact.rangeInfo.startYear}-${fact.rangeInfo.endYear}）`,
         );
+        problems.push(
+          `- S4 为花为相触发流年：${fact.triggerYears.length > 0 ? fact.triggerYears.join('、') : '未命中'}。触发逻辑：流年${fact.role}走到${fact.carrierPalace}，与大限${fact.role}同宫，聚焦这条用忌冲体线。`,
+        );
       }
 
       for (const [role, anchor] of Object.entries(kinshipAnchors)) {
@@ -1373,11 +1405,11 @@ function generateS4(
   );
   lines.push('');
   if (decadalStrikeFacts.length > 0) {
-    lines.push('| 本命体宫 | 大限范围 | 大限落宫 | 飞忌路径 | 冲回本命 | 触发问题点 |');
-    lines.push('|----------|----------|----------|----------|----------|------------|');
+    lines.push('| 本命体宫 | 大限范围 | 大限落宫 | 飞忌路径 | 冲回本命 | 为花为相触发流年 | 触发问题点 |');
+    lines.push('|----------|----------|----------|----------|----------|------------------|------------|');
     for (const fact of decadalStrikeFacts) {
       lines.push(
-        `| ${fact.role} | ${fact.rangeInfo.startAge}-${fact.rangeInfo.endAge}岁（${fact.rangeInfo.startYear}-${fact.rangeInfo.endYear}） | ${fact.carrierPalace} | ${fact.tradeStar}忌→${fact.destPalace} | ${fact.role} | ${fact.issuePoint} |`,
+        `| ${fact.role} | ${fact.rangeInfo.startAge}-${fact.rangeInfo.endAge}岁（${fact.rangeInfo.startYear}-${fact.rangeInfo.endYear}） | ${fact.carrierPalace} | ${fact.tradeStar}忌→${fact.destPalace} | ${fact.role} | ${fact.triggerYears.length > 0 ? fact.triggerYears.join('、') : '未命中'} | ${fact.issuePoint} |`,
       );
     }
   } else {
