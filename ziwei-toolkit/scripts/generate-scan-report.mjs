@@ -414,7 +414,7 @@ function buildYearlyReferenceDate(year) {
   return `${year}-06-01`;
 }
 
-function collectSameRoleTriggerYears(chart, rangeInfo, role, carrierPalace) {
+function collectCarrierTriggerYears(chart, rangeInfo, carrierPalace) {
   const years = [];
   for (let year = rangeInfo.startYear; year <= rangeInfo.endYear; year += 1) {
     let horoscope;
@@ -426,7 +426,7 @@ function collectSameRoleTriggerYears(chart, rangeInfo, role, carrierPalace) {
 
     let yearlyPalace;
     try {
-      yearlyPalace = horoscope.palace(resolveRuntimePalaceName(role), 'yearly');
+      yearlyPalace = horoscope.palace('命宫', 'yearly');
     } catch {
       continue;
     }
@@ -505,7 +505,7 @@ function collectDecadalStrikeFacts(input, palaces, starMap, birthYear) {
         tradeStar: dest.star,
         destPalace: dest.palace,
         clashPalace,
-        triggerYears: collectSameRoleTriggerYears(chart, rangeInfo, role, carrierPalace),
+        triggerYears: collectCarrierTriggerYears(chart, rangeInfo, carrierPalace),
         issuePoint: `${PALACE_TOPICS[role] || role}在该大限承压，属于同类宫位的用忌冲体`,
       });
     }
@@ -516,6 +516,93 @@ function collectDecadalStrikeFacts(input, palaces, starMap, birthYear) {
 
 function filterDecadalStrikeFactsByTimingWindow(facts, currentYear) {
   return facts.filter((fact) => isRangeWithinTimingWindow(fact.rangeInfo, currentYear));
+}
+
+function filterDecadalFactsByMaxAge(facts) {
+  return facts.filter((fact) => fact.rangeInfo?.startAge <= TIMING_WINDOW.maxAge);
+}
+
+function collectDecadalGeneralClashFacts(input, palaces, starMap, birthYear) {
+  if (!input || !birthYear) return [];
+
+  let chart;
+  try {
+    chart = buildChart({
+      calendar: input.calendar,
+      gender: input.gender,
+      date: input.date,
+      timeIndex: input.timeIndex,
+      isLeapMonth: input.isLeapMonth,
+      fixLeap: input.fixLeap,
+      language: input.language || 'zh-CN',
+    });
+  } catch {
+    return [];
+  }
+
+  const rangeInfos = [];
+  const seenRanges = new Set();
+  for (const palace of palaces) {
+    const range = palace.decadal?.range;
+    if (!range) continue;
+    const key = range.join('-');
+    if (seenRanges.has(key)) continue;
+    seenRanges.add(key);
+    const rangeInfo = ageRangeToGregorian(range, birthYear);
+    if (rangeInfo) rangeInfos.push(rangeInfo);
+  }
+
+  const facts = [];
+  const seenFacts = new Set();
+  for (const rangeInfo of rangeInfos.sort((a, b) => a.startAge - b.startAge)) {
+    const referenceDate = buildRepresentativeDate(rangeInfo);
+    let horoscope;
+    try {
+      horoscope = chart.horoscope(referenceDate);
+    } catch {
+      continue;
+    }
+
+    for (const role of PALACE_ORDER) {
+      let decadalPalace;
+      try {
+        decadalPalace = horoscope.palace(resolveRuntimePalaceName(role), 'decadal');
+      } catch {
+        continue;
+      }
+      if (!decadalPalace) continue;
+
+      const carrierPalace = normName(decadalPalace.name);
+      const dest = flyTo(decadalPalace.heavenlyStem, '忌', starMap);
+      if (!dest) continue;
+      const clashPalace = oppositeName(dest.palace);
+
+      const key = [
+        rangeInfo.startAge,
+        rangeInfo.endAge,
+        role,
+        carrierPalace,
+        dest.palace,
+        clashPalace,
+      ].join('|');
+      if (seenFacts.has(key)) continue;
+      seenFacts.add(key);
+
+      facts.push({
+        role,
+        rangeInfo,
+        carrierPalace,
+        carrierStem: decadalPalace.heavenlyStem,
+        tradeStar: dest.star,
+        destPalace: dest.palace,
+        clashPalace,
+        triggerYears: collectCarrierTriggerYears(chart, rangeInfo, carrierPalace),
+        issuePoint: `大限${role}飞忌落${dest.palace}，对冲${clashPalace}`,
+      });
+    }
+  }
+
+  return facts;
 }
 
 function isMaleRole(role) {
@@ -1239,6 +1326,7 @@ function generateS4(
   selfHua,
   kinshipAnchors,
   taijiFacts,
+  decadalGeneralClashFacts,
   decadalStrikeFacts,
   birthYear,
   currentYear,
@@ -1343,7 +1431,7 @@ function generateS4(
           `- S4 大限用忌冲体：按宫位有效归大，以本命${fact.role}为体、大限${fact.role}为用。该大限落在本命${fact.carrierPalace}，${fact.carrierStem}干飞${fact.tradeStar}忌到${fact.destPalace}，冲回本命${fact.role}。触发问题点：${fact.issuePoint}。对应大限：${fact.rangeInfo.startAge}-${fact.rangeInfo.endAge}岁（${fact.rangeInfo.startYear}-${fact.rangeInfo.endYear}）`,
         );
         problems.push(
-          `- S4 为花为相触发流年：${fact.triggerYears.length > 0 ? fact.triggerYears.join('、') : '未命中'}。触发逻辑：流年${fact.role}走到${fact.carrierPalace}，与大限${fact.role}同宫，聚焦这条用忌冲体线。`,
+          `- S4 流年命宫触发：${fact.triggerYears.length > 0 ? fact.triggerYears.join('、') : '未命中'}。触发逻辑：流年命宫踏入发射宫位${fact.carrierPalace}，聚焦“大限${fact.role}飞忌冲本命${fact.role}”这条线。`,
         );
       }
 
@@ -1398,15 +1486,15 @@ function generateS4(
     lines.push('');
   }
 
-  lines.push('### S4-B 大限用忌冲体排查');
+  lines.push('### S4-B1 大限用忌冲体排查');
   lines.push('');
   lines.push(
     `按“宫位有效，归大碰撞”原则，仅收录同类宫位的大限用忌冲体；时间默认收口到 ${currentYear - TIMING_WINDOW.pastYears}-${currentYear + TIMING_WINDOW.futureYears}，并剔除 ${TIMING_WINDOW.maxAge} 岁后的远期窗口。`,
   );
   lines.push('');
   if (decadalStrikeFacts.length > 0) {
-    lines.push('| 本命体宫 | 大限范围 | 大限落宫 | 飞忌路径 | 冲回本命 | 为花为相触发流年 | 触发问题点 |');
-    lines.push('|----------|----------|----------|----------|----------|------------------|------------|');
+    lines.push('| 本命体宫 | 大限范围 | 发射宫位 | 飞忌路径 | 冲回本命 | 流年命宫触发 | 触发问题点 |');
+    lines.push('|----------|----------|----------|----------|----------|--------------|------------|');
     for (const fact of decadalStrikeFacts) {
       lines.push(
         `| ${fact.role} | ${fact.rangeInfo.startAge}-${fact.rangeInfo.endAge}岁（${fact.rangeInfo.startYear}-${fact.rangeInfo.endYear}） | ${fact.carrierPalace} | ${fact.tradeStar}忌→${fact.destPalace} | ${fact.role} | ${fact.triggerYears.length > 0 ? fact.triggerYears.join('、') : '未命中'} | ${fact.issuePoint} |`,
@@ -1414,6 +1502,23 @@ function generateS4(
     }
   } else {
     lines.push('未检测到大限同类宫位的用忌冲体。');
+  }
+  lines.push('');
+
+  lines.push('### S4-B2 大限飞忌对冲总表');
+  lines.push('');
+  lines.push(`补充展开所有宫位的大限飞忌路径，只保留 ${TIMING_WINDOW.maxAge} 岁前的结构，不再限制当前时间窗口。`);
+  lines.push('');
+  if (decadalGeneralClashFacts.length > 0) {
+    lines.push('| 大限宫职 | 大限范围 | 发射宫位 | 飞忌路径 | 飞忌落宫 | 忌冲宫 | 流年命宫触发 | 说明 |');
+    lines.push('|----------|----------|----------|----------|----------|--------|--------------|------|');
+    for (const fact of decadalGeneralClashFacts) {
+      lines.push(
+        `| ${fact.role} | ${fact.rangeInfo.startAge}-${fact.rangeInfo.endAge}岁（${fact.rangeInfo.startYear}-${fact.rangeInfo.endYear}） | ${fact.carrierPalace} | ${fact.tradeStar}忌→${fact.destPalace} | ${fact.destPalace} | ${fact.clashPalace} | ${fact.triggerYears.length > 0 ? fact.triggerYears.join('、') : '未命中'} | ${fact.issuePoint} |`,
+      );
+    }
+  } else {
+    lines.push('未检测到可收录的大限飞忌对冲结构。');
   }
   lines.push('');
 
@@ -1469,6 +1574,9 @@ function main() {
   const starMap = buildStarMap(palaces);
   const jiEffects = collectJiEffects(palaces, starMap);
   const tradeEffects = collectTradeEffects(palaces, starMap);
+  const decadalGeneralClashFacts = filterDecadalFactsByMaxAge(
+    collectDecadalGeneralClashFacts(rawData.input, palaces, starMap, birthYear),
+  );
   const decadalStrikeFacts = filterDecadalStrikeFactsByTimingWindow(
     collectDecadalStrikeFacts(rawData.input, palaces, starMap, birthYear),
     currentYear,
@@ -1486,6 +1594,7 @@ function main() {
     s3.selfHua,
     s1.kinshipAnchors,
     s3.taijiFacts,
+    decadalGeneralClashFacts,
     decadalStrikeFacts,
     birthYear,
     currentYear,
