@@ -386,6 +386,67 @@ function checkSignals(chart) {
   return { signals, jiChong, sanBa };
 }
 
+// ========== 方向推荐 ==========
+const STAR_FIELDS = {
+  '文昌': ['文学','语言','法律','考证','教育'],
+  '文曲': ['艺术','音乐','设计','传播','口才类'],
+  '天机': ['策划','IT','数学','数据分析','咨询'],
+  '巨门': ['法律','辩论','传播','调查','心理学'],
+  '天梁': ['教育','医疗','公益','学术研究','管理'],
+  '紫微': ['管理','领导力','综合统筹','公共事务'],
+  '天府': ['管理','金融','地产','资源整合'],
+  '贪狼': ['艺术','娱乐','外交','创意','市场'],
+  '七杀': ['军事','工程','技术','实操','创业'],
+  '破军': ['创新行业','创业','破坏性革新','新兴领域'],
+  '武曲': ['金融','会计','理工','制造业','军事'],
+  '廉贞': ['精密技术','电子','司法','刑侦','管制行业'],
+  '太阳': ['公共事务','政治','能源','教育','公益'],
+  '太阴': ['财务','女性相关','美学','地产','服务'],
+  '天同': ['服务','艺术','生活美学','心理学','养老'],
+  '天相': ['行政','协调','法律','公关','HR'],
+  '左辅': ['辅助型','幕后','咨询','技术辅助'],
+  '右弼': ['辅助型','创意','直觉型工作'],
+  '天魁/天钺': ['贵人型','需要资源对接的行业'],
+  '禄存': ['积累型','稳健行业','地产','金融'],
+  '擎羊/火星/铃星/陀罗': [], // 煞星不推荐
+};
+
+function recommendFields(palaces) {
+  // 学业方向: 父母宫主星 + 疾厄宫主星
+  const parents = palaces.find(p => p.name === '父母');
+  const health = palaces.find(p => p.name === '疾厄');
+  const stars = [
+    ...(parents?.majorStars||[]).map(s => s.name),
+    ...(health?.majorStars||[]).map(s => s.name),
+    ...(parents?.minorStars||[]).filter(s => ['文昌','文曲','左辅','右弼','天魁','天钺','禄存'].includes(s.name)).map(s => s.name),
+    ...(health?.minorStars||[]).filter(s => ['文昌','文曲'].includes(s.name)).map(s => s.name),
+  ];
+  const fields = new Set();
+  for (const s of stars) {
+    const f = STAR_FIELDS[s];
+    if (f) f.forEach(x => fields.add(x));
+  }
+  return [...fields];
+}
+
+function recommendCareers(palaces) {
+  // 事业方向: 官禄宫 + 财帛宫 + 命宫主星
+  const career = palaces.find(p => p.name === '官禄');
+  const wealth = palaces.find(p => p.name === '财帛');
+  const ming = palaces.find(p => p.name === '命宫');
+  const stars = [
+    ...(career?.majorStars||[]).map(s => s.name),
+    ...(wealth?.majorStars||[]).map(s => s.name),
+    ...(ming?.majorStars||[]).map(s => s.name),
+  ];
+  const fields = new Set();
+  for (const s of stars) {
+    const f = STAR_FIELDS[s];
+    if (f) f.forEach(x => fields.add(x));
+  }
+  return [...fields];
+}
+
 // ========== 主入口 ==========
 export function analyze(input) {
   const chart = parseChart(input);
@@ -430,6 +491,10 @@ export function analyze(input) {
     flyResults,
     feiGongResults,
     zhuan,
+    recommendations: {
+      studyFields: recommendFields(chart.palaces),
+      careers: recommendCareers(chart.palaces),
+    },
   };
 }
 

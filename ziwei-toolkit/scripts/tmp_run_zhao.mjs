@@ -12,7 +12,7 @@ const r = analyze({
 });
 
 writeFileSync(new URL('./tmp_zhao_analysis.json', import.meta.url), JSON.stringify(r, null, 2), 'utf8');
-console.log('Written. Basic:', JSON.stringify(r.basic));
+console.log('Basic:', JSON.stringify(r.basic));
 console.log('Signals:', JSON.stringify(r.signals));
-console.log('忌冲:', JSON.stringify(r.jiChong));
-console.log('三八:', JSON.stringify(r.sanBa));
+console.log('推荐学业:', JSON.stringify(r.recommendations.studyFields));
+console.log('推荐行业:', JSON.stringify(r.recommendations.careers));
