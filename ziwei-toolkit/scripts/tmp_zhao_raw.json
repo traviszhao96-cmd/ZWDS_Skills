@@ -1,0 +1,152 @@
+{
+  "name": "赵",
+  "gender": "male",
+  "shengNian": {
+    "禄": {
+      "star": "天同",
+      "palace": {
+        "index": 9,
+        "name": "子女",
+        "heavenlyStem": "己",
+        "earthlyBranch": "亥"
+      },
+      "oppositePalace": {
+        "index": 3,
+        "name": "田宅",
+        "heavenlyStem": "癸",
+        "earthlyBranch": "巳"
+      }
+    },
+    "权": {
+      "star": "天机",
+      "palace": {
+        "index": 1,
+        "name": "父母",
+        "heavenlyStem": "辛",
+        "earthlyBranch": "卯"
+      },
+      "oppositePalace": {
+        "index": 7,
+        "name": "疾厄",
+        "heavenlyStem": "丁",
+        "earthlyBranch": "酉"
+      }
+    },
+    "科": {
+      "star": "文昌",
+      "palace": {
+        "index": 7,
+        "name": "疾厄",
+        "heavenlyStem": "丁",
+        "earthlyBranch": "酉"
+      },
+      "oppositePalace": {
+        "index": 1,
+        "name": "父母",
+        "heavenlyStem": "辛",
+        "earthlyBranch": "卯"
+      }
+    },
+    "忌": {
+      "star": "廉贞",
+      "palace": {
+        "index": 6,
+        "name": "迁移",
+        "heavenlyStem": "丙",
+        "earthlyBranch": "申"
+      },
+      "oppositePalace": {
+        "index": 0,
+        "name": "命宫",
+        "heavenlyStem": "庚",
+        "earthlyBranch": "寅"
+      }
+    }
+  },
+  "palaces": [
+    {
+      "name": "命宫",
+      "dz": "寅",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "父母",
+      "dz": "卯",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "福德",
+      "dz": "辰",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "田宅",
+      "dz": "巳",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "官禄",
+      "dz": "午",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "仆役",
+      "dz": "未",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "迁移",
+      "dz": "申",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "疾厄",
+      "dz": "酉",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "财帛",
+      "dz": "戌",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "子女",
+      "dz": "亥",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "夫妻",
+      "dz": "子",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    },
+    {
+      "name": "兄弟",
+      "dz": "丑",
+      "mainStar": [],
+      "minorStar": [],
+      "sihua": []
+    }
+  ]
+}
