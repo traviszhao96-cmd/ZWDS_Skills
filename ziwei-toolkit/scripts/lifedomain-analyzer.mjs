@@ -226,6 +226,7 @@ function checkSignals(chart) {
     '事业': { high: false, reasons: [] },
     '财富': { high: false, reasons: [] },
     '家庭·原生': { high: false, reasons: [] },
+    '学业': { high: false, reasons: [] },
     '恋爱': { high: false, reasons: [] },
     '婚姻': { high: false, reasons: [] },
     '交友': { high: false, reasons: [] },
@@ -282,6 +283,45 @@ function checkSignals(chart) {
       signals['家庭·原生'].reasons.push(n + '被冲');
     }
   });
+
+  // 学业: 文昌化科/忌、文曲科/忌、天机权/科在父母/福德、父母生年忌/自化忌、文昌科@疾厄、巨门忌@福德
+  // 文昌/文曲化科/化忌 in 父母/疾厄/命宫
+  ['父母','疾厄','命宫','福德'].forEach(n => {
+    const p = P(n);
+    for (const s of [...p.majorStars, ...p.minorStars]) {
+      if ((s.name === '文昌' || s.name === '文曲') && (s.mutagen === '科' || s.mutagen === '忌')) {
+        signals['学业'].high = true;
+        signals['学业'].reasons.push(s.name+s.mutagen+'@'+n);
+      }
+    }
+  });
+  // 天机权/科 in 父母/福德
+  ['父母','福德'].forEach(n => {
+    const p = P(n);
+    for (const s of [...p.majorStars, ...p.minorStars]) {
+      if (s.name === '天机' && (s.mutagen === '权' || s.mutagen === '科')) {
+        signals['学业'].high = true;
+        signals['学业'].reasons.push('天机'+s.mutagen+'@'+n);
+      }
+    }
+  });
+  // 父母生年忌
+  if (P('父母').birthMutagens.includes('忌')) {
+    signals['学业'].high = true;
+    signals['学业'].reasons.push('父母生年忌');
+  }
+  // 父母自化忌
+  if (P('父母').selfMutagens.some(s => s.type === '忌')) {
+    signals['学业'].high = true;
+    signals['学业'].reasons.push('父母自化忌');
+  }
+  // 巨门忌@福德
+  for (const s of [...P('福德').majorStars, ...P('福德').minorStars]) {
+    if (s.name === '巨门' && s.mutagen === '忌') {
+      signals['学业'].high = true;
+      signals['学业'].reasons.push('巨门忌@福德');
+    }
+  }
 
   // 恋爱: 子女忌 / 左右化科 / 子女自化忌
   if (P('子女').birthMutagens.includes('忌')) {
