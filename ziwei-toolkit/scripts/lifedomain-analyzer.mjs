@@ -412,12 +412,16 @@ const STAR_FIELDS = {
 };
 
 function recommendFields(palaces) {
-  // 学业方向: 父母宫主星 + 疾厄宫主星
+  // 学业方向: 父母宫(学习风格) + 疾厄宫(身体/认证) + 官禄宫(职业→反推专业) + 财帛宫(收入路径→反推专业)
   const parents = palaces.find(p => p.name === '父母');
   const health = palaces.find(p => p.name === '疾厄');
+  const career = palaces.find(p => p.name === '官禄');
+  const wealth = palaces.find(p => p.name === '财帛');
   const stars = [
     ...(parents?.majorStars||[]).map(s => s.name),
     ...(health?.majorStars||[]).map(s => s.name),
+    ...(career?.majorStars||[]).map(s => s.name),
+    ...(wealth?.majorStars||[]).map(s => s.name),
     ...(parents?.minorStars||[]).filter(s => ['文昌','文曲','左辅','右弼','天魁','天钺','禄存'].includes(s.name)).map(s => s.name),
     ...(health?.minorStars||[]).filter(s => ['文昌','文曲'].includes(s.name)).map(s => s.name),
   ];
@@ -430,14 +434,16 @@ function recommendFields(palaces) {
 }
 
 function recommendCareers(palaces) {
-  // 事业方向: 官禄宫 + 财帛宫 + 命宫主星
+  // 事业方向: 官禄宫 + 财帛宫 + 命宫 + 迁移宫(外出/对外呈现)
   const career = palaces.find(p => p.name === '官禄');
   const wealth = palaces.find(p => p.name === '财帛');
   const ming = palaces.find(p => p.name === '命宫');
+  const qianyi = palaces.find(p => p.name === '迁移');
   const stars = [
     ...(career?.majorStars||[]).map(s => s.name),
     ...(wealth?.majorStars||[]).map(s => s.name),
     ...(ming?.majorStars||[]).map(s => s.name),
+    ...(qianyi?.majorStars||[]).map(s => s.name),
   ];
   const fields = new Set();
   for (const s of stars) {
