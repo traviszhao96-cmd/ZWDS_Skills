@@ -1,0 +1,607 @@
+{
+  "basic": {
+    "name": "1997-12-09 亥时 女",
+    "gender": "female",
+    "birthday": "1997-12-09",
+    "birthTime": 11,
+    "lunar": "一九九七年冬月初十",
+    "zodiac": "牛",
+    "wuXingJu": "木三局",
+    "shenGong": "夫妻",
+    "laiyinGong": "迁移",
+    "yearGan": "丁"
+  },
+  "shengNian": {
+    "禄": {
+      "star": "太阴",
+      "palace": "子女"
+    },
+    "权": {
+      "star": "天同",
+      "palace": "父母"
+    },
+    "科": {
+      "star": "天机",
+      "palace": "仆役"
+    },
+    "忌": {
+      "star": "巨门",
+      "palace": "兄弟"
+    }
+  },
+  "palaces": [
+    {
+      "name": "父母",
+      "heavenlyStem": "壬",
+      "stars": [
+        "天同(利)权",
+        "天梁(庙)",
+        "左辅",
+        "火星"
+      ],
+      "birthMutagens": [
+        "权"
+      ],
+      "selfMutagens": [
+        "禄",
+        "科"
+      ],
+      "fly": {
+        "禄": "父母",
+        "权": "迁移",
+        "科": "父母",
+        "忌": "福德"
+      },
+      "opposite": "疾厄",
+      "isBody": false
+    },
+    {
+      "name": "福德",
+      "heavenlyStem": "癸",
+      "stars": [
+        "武曲(利)",
+        "七杀(旺)",
+        "文曲"
+      ],
+      "birthMutagens": [],
+      "selfMutagens": [],
+      "fly": {
+        "禄": "迁移",
+        "权": "兄弟",
+        "科": "子女",
+        "忌": "夫妻"
+      },
+      "opposite": "财帛",
+      "isBody": false
+    },
+    {
+      "name": "田宅",
+      "heavenlyStem": "甲",
+      "stars": [
+        "太阳(旺)"
+      ],
+      "birthMutagens": [],
+      "selfMutagens": [
+        "忌"
+      ],
+      "fly": {
+        "禄": "夫妻",
+        "权": "迁移",
+        "科": "福德",
+        "忌": "田宅"
+      },
+      "opposite": "子女",
+      "isBody": false
+    },
+    {
+      "name": "官禄",
+      "heavenlyStem": "乙",
+      "stars": [
+        "陀罗"
+      ],
+      "birthMutagens": [],
+      "selfMutagens": [],
+      "fly": {
+        "禄": "交友",
+        "权": "父母",
+        "科": "迁移",
+        "忌": "子女"
+      },
+      "opposite": "夫妻",
+      "isBody": false
+    },
+    {
+      "name": "交友",
+      "heavenlyStem": "丙",
+      "stars": [
+        "天机(庙)科",
+        "禄存"
+      ],
+      "birthMutagens": [
+        "科"
+      ],
+      "selfMutagens": [
+        "权"
+      ],
+      "fly": {
+        "禄": "父母",
+        "权": "交友",
+        "科": "夫妻",
+        "忌": "夫妻"
+      },
+      "opposite": "兄弟",
+      "isBody": false
+    },
+    {
+      "name": "迁移",
+      "heavenlyStem": "丁",
+      "stars": [
+        "紫微(庙)",
+        "破军(旺)",
+        "擎羊"
+      ],
+      "birthMutagens": [],
+      "selfMutagens": [],
+      "fly": {
+        "禄": "子女",
+        "权": "父母",
+        "科": "交友",
+        "忌": "兄弟"
+      },
+      "opposite": "命宫",
+      "isBody": false
+    },
+    {
+      "name": "疾厄",
+      "heavenlyStem": "戊",
+      "stars": [],
+      "birthMutagens": [],
+      "selfMutagens": [],
+      "fly": {
+        "禄": "夫妻",
+        "权": "子女",
+        "科": "兄弟",
+        "忌": "交友"
+      },
+      "opposite": "父母",
+      "isBody": false
+    },
+    {
+      "name": "财帛",
+      "heavenlyStem": "己",
+      "stars": [
+        "天府(旺)",
+        "天钺",
+        "铃星"
+      ],
+      "birthMutagens": [],
+      "selfMutagens": [],
+      "fly": {
+        "禄": "福德",
+        "权": "夫妻",
+        "科": "父母",
+        "忌": "福德"
+      },
+      "opposite": "福德",
+      "isBody": false
+    },
+    {
+      "name": "子女",
+      "heavenlyStem": "庚",
+      "stars": [
+        "太阴(旺)禄",
+        "地劫"
+      ],
+      "birthMutagens": [
+        "禄"
+      ],
+      "selfMutagens": [
+        "科"
+      ],
+      "fly": {
+        "禄": "田宅",
+        "权": "福德",
+        "科": "子女",
+        "忌": "父母"
+      },
+      "opposite": "田宅",
+      "isBody": false
+    },
+    {
+      "name": "夫妻",
+      "heavenlyStem": "辛",
+      "stars": [
+        "廉贞(陷)",
+        "贪狼(陷)",
+        "文昌",
+        "天魁",
+        "天马"
+      ],
+      "birthMutagens": [],
+      "selfMutagens": [
+        "忌"
+      ],
+      "fly": {
+        "禄": "兄弟",
+        "权": "田宅",
+        "科": "福德",
+        "忌": "夫妻"
+      },
+      "opposite": "官禄",
+      "isBody": true
+    },
+    {
+      "name": "兄弟",
+      "heavenlyStem": "壬",
+      "stars": [
+        "巨门(旺)忌",
+        "右弼",
+        "地空"
+      ],
+      "birthMutagens": [
+        "忌"
+      ],
+      "selfMutagens": [],
+      "fly": {
+        "禄": "父母",
+        "权": "迁移",
+        "科": "父母",
+        "忌": "福德"
+      },
+      "opposite": "交友",
+      "isBody": false
+    },
+    {
+      "name": "命宫",
+      "heavenlyStem": "癸",
+      "stars": [
+        "天相(庙)"
+      ],
+      "birthMutagens": [],
+      "selfMutagens": [],
+      "fly": {
+        "禄": "迁移",
+        "权": "兄弟",
+        "科": "子女",
+        "忌": "夫妻"
+      },
+      "opposite": "迁移",
+      "isBody": false
+    }
+  ],
+  "signals": {
+    "身心与生活": {
+      "high": false,
+      "reasons": []
+    },
+    "事业": {
+      "high": false,
+      "reasons": []
+    },
+    "财富": {
+      "high": false,
+      "reasons": []
+    },
+    "家庭·原生": {
+      "high": true,
+      "reasons": [
+        "兄弟生年忌",
+        "兄弟被冲"
+      ]
+    },
+    "学业": {
+      "high": false,
+      "reasons": []
+    },
+    "恋爱": {
+      "high": false,
+      "reasons": []
+    },
+    "婚姻": {
+      "high": true,
+      "reasons": [
+        "夫妻自化忌"
+      ]
+    },
+    "交友": {
+      "high": false,
+      "reasons": []
+    },
+    "子女": {
+      "high": false,
+      "reasons": []
+    }
+  },
+  "jiChong": [
+    {
+      "type": "忌冲",
+      "from": "田宅",
+      "to": "子女",
+      "isBirthJi": false,
+      "isSelfJi": true
+    },
+    {
+      "type": "忌冲",
+      "from": "夫妻",
+      "to": "官禄",
+      "isBirthJi": false,
+      "isSelfJi": true
+    },
+    {
+      "type": "忌冲",
+      "from": "兄弟",
+      "to": "交友",
+      "isBirthJi": true,
+      "isSelfJi": false
+    }
+  ],
+  "sanBa": {
+    "broken": false,
+    "detail": null
+  },
+  "flyResults": [
+    {
+      "type": "由体入用",
+      "from": "子女",
+      "to": "田宅",
+      "hua": "禄",
+      "star": "太阴",
+      "valid": true
+    },
+    {
+      "type": "由体入用",
+      "from": "父母",
+      "to": "迁移",
+      "hua": "权",
+      "star": "天同",
+      "valid": true
+    },
+    {
+      "type": "由体入用",
+      "from": "兄弟",
+      "to": "福德",
+      "hua": "忌",
+      "star": "巨门",
+      "valid": true
+    }
+  ],
+  "feiGongResults": [
+    {
+      "type": "飞宫遇生年",
+      "from": "父母",
+      "to": "父母",
+      "hua": "禄",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "父母",
+      "to": "父母",
+      "hua": "科",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "福德",
+      "to": "兄弟",
+      "hua": "权",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "福德",
+      "to": "子女",
+      "hua": "科",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "官禄",
+      "to": "父母",
+      "hua": "权",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "官禄",
+      "to": "子女",
+      "hua": "忌",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "交友",
+      "to": "父母",
+      "hua": "禄",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "迁移",
+      "to": "子女",
+      "hua": "禄",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "迁移",
+      "to": "父母",
+      "hua": "权",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "迁移",
+      "to": "兄弟",
+      "hua": "忌",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "疾厄",
+      "to": "子女",
+      "hua": "权",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "疾厄",
+      "to": "兄弟",
+      "hua": "科",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "财帛",
+      "to": "父母",
+      "hua": "科",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "子女",
+      "to": "子女",
+      "hua": "科",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "子女",
+      "to": "父母",
+      "hua": "忌",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "夫妻",
+      "to": "兄弟",
+      "hua": "禄",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "兄弟",
+      "to": "父母",
+      "hua": "禄",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "兄弟",
+      "to": "父母",
+      "hua": "科",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "命宫",
+      "to": "兄弟",
+      "hua": "权",
+      "valid": true
+    },
+    {
+      "type": "飞宫遇生年",
+      "from": "命宫",
+      "to": "子女",
+      "hua": "科",
+      "valid": true
+    }
+  ],
+  "zhuan": {
+    "夫妻": {
+      "命宫": "子女",
+      "兄弟": "财帛",
+      "夫妻": "疾厄",
+      "子女": "迁移",
+      "财帛": "交友",
+      "疾厄": "官禄",
+      "迁移": "田宅",
+      "交友": "福德",
+      "官禄": "父母",
+      "田宅": "命宫",
+      "福德": "兄弟",
+      "父母": "夫妻"
+    },
+    "子女": {
+      "命宫": "财帛",
+      "兄弟": "疾厄",
+      "夫妻": "迁移",
+      "子女": "交友",
+      "财帛": "官禄",
+      "疾厄": "田宅",
+      "迁移": "福德",
+      "交友": "父母",
+      "官禄": "命宫",
+      "田宅": "兄弟",
+      "福德": "夫妻",
+      "父母": "子女"
+    },
+    "财帛": {
+      "命宫": "疾厄",
+      "兄弟": "迁移",
+      "夫妻": "交友",
+      "子女": "官禄",
+      "财帛": "田宅",
+      "疾厄": "福德",
+      "迁移": "父母",
+      "交友": "命宫",
+      "官禄": "兄弟",
+      "田宅": "夫妻",
+      "福德": "子女",
+      "父母": "财帛"
+    },
+    "官禄": {
+      "命宫": "田宅",
+      "兄弟": "福德",
+      "夫妻": "父母",
+      "子女": "命宫",
+      "财帛": "兄弟",
+      "疾厄": "夫妻",
+      "迁移": "子女",
+      "交友": "财帛",
+      "官禄": "疾厄",
+      "田宅": "迁移",
+      "福德": "交友",
+      "父母": "官禄"
+    }
+  },
+  "recommendations": {
+    "studyFields": [
+      "服务",
+      "艺术",
+      "生活美学",
+      "心理学",
+      "养老",
+      "教育",
+      "医疗",
+      "公益",
+      "学术研究",
+      "管理",
+      "金融",
+      "地产",
+      "资源整合",
+      "辅助型",
+      "幕后",
+      "咨询",
+      "技术辅助"
+    ],
+    "careers": [
+      "管理",
+      "金融",
+      "地产",
+      "资源整合",
+      "行政",
+      "协调",
+      "法律",
+      "公关",
+      "HR",
+      "领导力",
+      "综合统筹",
+      "公共事务",
+      "创新行业",
+      "创业",
+      "破坏性革新",
+      "新兴领域"
+    ]
+  }
+}

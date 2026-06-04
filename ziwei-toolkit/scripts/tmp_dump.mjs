@@ -1,0 +1,11 @@
+import {buildChart} from './lib/kinship.mjs';
+import {serializeChart} from './lib/chart-output.mjs';
+import {writeFileSync} from 'fs';
+const c = buildChart({date:'1997-12-09',timeIndex:11,calendar:'solar',gender:'female',isLeapMonth:false,fixLeap:true});
+const s = serializeChart(c);
+const lines = [];
+for(const p of s.palaces) lines.push(p.name + ' ' + p.heavenlyStem + ' | ' + (p.majorStars||[]).map(x=>x.name+(x.mutagen||'')+'('+x.brightness+')').join(' ') + ' | ' + (p.minorStars||[]).map(x=>x.name+(x.mutagen||'')).join(' '));
+lines.push('bodyEarth='+s.earthlyBranchOfBodyPalace + ' body='+s.body);
+lines.push('soul='+s.soul + ' soulEarth='+s.earthlyBranchOfSoulPalace);
+writeFileSync(new URL('./tmp_names.txt', import.meta.url), lines.join('\n'), 'utf8');
+console.log('done');

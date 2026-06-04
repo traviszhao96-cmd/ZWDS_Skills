@@ -6,6 +6,7 @@ import { serializeChart } from './lib/chart-output.mjs';
 const GAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 const ZHI = ['寅','卯','辰','巳','午','未','申','酉','戌','亥','子','丑'];
 const PALACE_NAMES = ['命宫','兄弟','夫妻','子女','财帛','疾厄','迁移','交友','官禄','田宅','福德','父母'];
+const NAME_MAP = { '仆役': '交友', '交友': '交友' }; // 统一仆役→交友
 
 // ========== 基础工具 ==========
 
@@ -32,7 +33,7 @@ function parseChart(input) {
 
   // 确定身宫: bodyEarth → 找到该地支所在的宫位
   const bodyPalace = ps.find(p => p.earthlyBranch === s.earthlyBranchOfBodyPalace);
-  const shenGong = bodyPalace ? bodyPalace.name : '?';
+  const shenGong = bodyPalace ? (NAME_MAP[bodyPalace.name] || bodyPalace.name) : '?';
 
   // 解析每个宫位
   const palaces = ps.map((p, i) => {
@@ -65,13 +66,15 @@ function parseChart(input) {
     const fly = {};
     if (p.mutagedPlaces) {
       for (const t of ['禄','权','科','忌']) {
-        if (p.mutagedPlaces[t]) fly[t] = p.mutagedPlaces[t].name;
+        if (p.mutagedPlaces[t]) fly[t] = NAME_MAP[p.mutagedPlaces[t].name] || p.mutagedPlaces[t].name;
       }
     }
 
+    const normalized = NAME_MAP[p.name] || p.name;
     return {
       index: i,
-      name: p.name,
+      name: normalized,
+      originalName: p.name,
       heavenlyStem: p.heavenlyStem,
       earthlyBranch: p.earthlyBranch,
       majorStars: major,
@@ -80,7 +83,7 @@ function parseChart(input) {
       selfMutagens,
       fly,
       isBodyPalace: p.isBodyPalace,
-      oppositePalace: p.oppositePalace?.name || null,
+      oppositePalace: p.oppositePalace?.name ? (NAME_MAP[p.oppositePalace.name] || p.oppositePalace.name) : null,
     };
   });
 
@@ -105,7 +108,7 @@ function parseChart(input) {
     zodiac: s.zodiac || s.shengxiao,
     wuXingJu: s.fiveElementsClass,
     shenGong,
-    laiyinGong: laiyin ? laiyin.name : '?',
+    laiyinGong: laiyin ? (NAME_MAP[laiyin.name] || laiyin.name) : '?',
     shengNian,
     palaces,
   };
