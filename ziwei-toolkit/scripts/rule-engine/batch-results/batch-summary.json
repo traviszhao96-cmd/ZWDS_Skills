@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-06-15T00:55:43.310Z",
+  "timestamp": "2026-06-15T01:13:40.063Z",
   "totalCases": 54,
   "realCases": 44,
   "processed": 44,
   "errors": 0,
-  "totalHits": 698,
+  "totalHits": 693,
   "totalPossible": 704,
-  "hitRate": "99.1%",
+  "hitRate": "98.4%",
   "perRule": [
     {
       "id": 1,
@@ -97,14 +97,6 @@
       "rate": "100.0%"
     },
     {
-      "id": 13,
-      "name": "命签纸田(意外三宫)",
-      "layer": "时序推运",
-      "hitCount": 44,
-      "total": 44,
-      "rate": "100.0%"
-    },
-    {
       "id": 14,
       "name": "流月流日推算法",
       "layer": "时序推运",
@@ -127,6 +119,14 @@
       "hitCount": 44,
       "total": 44,
       "rate": "100.0%"
+    },
+    {
+      "id": 13,
+      "name": "命迁子田",
+      "layer": "时序推运",
+      "hitCount": 39,
+      "total": 44,
+      "rate": "88.6%"
     },
     {
       "id": 2,

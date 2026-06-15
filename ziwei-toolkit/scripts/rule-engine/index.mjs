@@ -14,7 +14,7 @@ export { checkSquareImagery } from './rule-09-square-imagery.mjs';
 export { checkYinYangXiaoZhang } from './rule-10-yinyang-xiaozhang.mjs';
 export { checkJiChongDuiGong } from './rule-11-ji-chong-duigong.mjs';
 export { checkYiHouShiQian } from './rule-12-yihou-shiqian.mjs';
-export { checkMingQianZhiTian } from './rule-13-mingqian-zitian.mjs';
+export { checkMingQianZiTian } from './rule-13-mingqian-zitian.mjs';
 export { checkLiuYueLiuRi } from './rule-14-liuyue-liuri.mjs';
 export { checkTaisuiDiegong } from './rule-15-taisui-diegong.mjs';
 export { checkShengXiaoMethod } from './rule-16-shengxiao-method.mjs';
@@ -33,7 +33,7 @@ export const ALL_RULES = [
   { id: 10, name: '阴阳消长', fn: 'checkYinYangXiaoZhang', layer: '自化平方' },
   { id: 11, name: '忌冲对宫', fn: 'checkJiChongDuiGong', layer: '自化平方' },
   { id: 12, name: '以后释前', fn: 'checkYiHouShiQian', layer: '时序推运' },
-  { id: 13, name: '命签纸田(意外三宫)', fn: 'checkMingQianZhiTian', layer: '时序推运' },
+  { id: 13, name: '命迁子田', fn: 'checkMingQianZiTian', layer: '时序推运' },
   { id: 14, name: '流月流日推算法', fn: 'checkLiuYueLiuRi', layer: '时序推运' },
   { id: 15, name: '太岁论法+叠宫', fn: 'checkTaisuiDiegong', layer: '时序推运' },
   { id: 16, name: '生肖法', fn: 'checkShengXiaoMethod', layer: '六亲层' },
@@ -77,7 +77,7 @@ export async function runAllRules(chart, caseInfo) {
     modules[9].checkYinYangXiaoZhang,
     modules[10].checkJiChongDuiGong,
     modules[11].checkYiHouShiQian,
-    modules[12].checkMingQianZhiTian,
+    modules[12].checkMingQianZiTian,
     modules[13].checkLiuYueLiuRi,
     modules[14].checkTaisuiDiegong,
     modules[15].checkShengXiaoMethod,
