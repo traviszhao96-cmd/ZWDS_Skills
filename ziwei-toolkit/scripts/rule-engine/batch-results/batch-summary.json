@@ -1,0 +1,140 @@
+{
+  "timestamp": "2026-06-15T00:55:43.310Z",
+  "totalCases": 54,
+  "realCases": 44,
+  "processed": 44,
+  "errors": 0,
+  "totalHits": 698,
+  "totalPossible": 704,
+  "hitRate": "99.1%",
+  "perRule": [
+    {
+      "id": 1,
+      "name": "四化人格特质",
+      "layer": "命格主轴",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 3,
+      "name": "星有本宫",
+      "layer": "命格主轴",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 4,
+      "name": "身宫深度判断",
+      "layer": "定盘层",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 5,
+      "name": "六组阴阳宫二分",
+      "layer": "定盘层",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 6,
+      "name": "有效飞宫的判断",
+      "layer": "体用飞宫",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 7,
+      "name": "一五九法",
+      "layer": "体用飞宫",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 8,
+      "name": "化出/化入",
+      "layer": "体用飞宫",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 9,
+      "name": "平方象意取象",
+      "layer": "自化平方",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 10,
+      "name": "阴阳消长",
+      "layer": "自化平方",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 11,
+      "name": "忌冲对宫",
+      "layer": "自化平方",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 12,
+      "name": "以后释前",
+      "layer": "时序推运",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 13,
+      "name": "命签纸田(意外三宫)",
+      "layer": "时序推运",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 14,
+      "name": "流月流日推算法",
+      "layer": "时序推运",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 15,
+      "name": "太岁论法+叠宫",
+      "layer": "时序推运",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 16,
+      "name": "生肖法",
+      "layer": "六亲层",
+      "hitCount": 44,
+      "total": 44,
+      "rate": "100.0%"
+    },
+    {
+      "id": 2,
+      "name": "过犹不及皆是病",
+      "layer": "命格主轴",
+      "hitCount": 38,
+      "total": 44,
+      "rate": "86.4%"
+    }
+  ]
+}
